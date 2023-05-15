@@ -1,14 +1,19 @@
-package com.example.demo;
+package com.example.demo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "books")
 public class Book {
 
     @Id
@@ -34,12 +39,6 @@ public class Book {
 
     @Column(nullable = false)
     private Integer numberOfReads = 0;
-
-    // Costruttori, getter e setter
-
-    // ...
-
-    // Getter e Setter
 
     public Long getId() {
         return id;
