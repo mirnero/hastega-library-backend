@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: your_name
+      changes:
+        - createTable:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: author
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: isbn
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: added_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deletion_date
+                  type: DATE
+              - column:
+                  name: plot
+                  type: VARCHAR(1000)
+              - column:
+                  name: num_readings
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+                    min: 0
