@@ -1,11 +1,13 @@
-# hastega-library-backend
-Test tecnico
 
-## Database
+## Postgres Database
 docker-compose up
 
 ## Start App
 ./mvnw spring-boot:run
+
+## ALLINONE with docker-compose
+cd src/main
+docker-compose up
 
 ## API
 ### Get all books
