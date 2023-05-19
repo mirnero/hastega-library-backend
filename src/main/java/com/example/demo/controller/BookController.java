@@ -81,13 +81,21 @@ public class BookController {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found"));
 
-        book.setTitle(bookDetails.getTitle());
-        book.setAuthor(bookDetails.getAuthor());
-        book.setIsbn(bookDetails.getIsbn());
-        book.setDateAdded(bookDetails.getDateAdded());
-        book.setDateDeleted(bookDetails.getDateDeleted());
-        book.setPlot(bookDetails.getPlot());
-        book.setNumberOfReads(bookDetails.getNumberOfReads());
+                if (bookDetails.getTitle() != null) {
+                    book.setTitle(bookDetails.getTitle());
+                }
+            
+                if (bookDetails.getAuthor() != null) {
+                    book.setAuthor(bookDetails.getAuthor());
+                }
+            
+                if (bookDetails.getIsbn() != null) {
+                    book.setIsbn(bookDetails.getIsbn());
+                }
+                        
+                if (bookDetails.getPlot() != null) {
+                    book.setPlot(bookDetails.getPlot());
+                }
 
         return bookRepository.save(book);
     }
