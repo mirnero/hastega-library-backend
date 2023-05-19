@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Book;
 import com.example.demo.repository.BookRepository;
+import com.example.demo.specifications.BookSpecifications;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 
+
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -42,7 +45,7 @@ public class BookController {
             @RequestParam(required = false) String search,
             Pageable pageable
     ) {
-        Specification<Book> spec = Specification.where(null);
+        Specification<Book> spec = Specification.where(BookSpecifications.dateDeletedIsNull());
     
         if (search != null && !search.isEmpty()) {
             spec = spec.and((root, query, criteriaBuilder) -> {
@@ -91,10 +94,10 @@ public class BookController {
 
     // DELETE /books/{id}
     @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable long id) {
+    public Book deleteBook(@PathVariable long id) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found"));
-
-        bookRepository.delete(book);
+        book.setDateDeleted(LocalDate.now());
+        return bookRepository.save(book);
     }
 }
