@@ -138,3 +138,20 @@ RESPONSE
 	"numberOfReads": 0
 }
 ```
+
+### Read book with id = {id}
+PUT http://localhost:8080/books/{id}/read
+
+RESPONSE
+```json
+{
+	"id": 29,
+	"title": "New title",
+	"author": "Gaize",
+	"isbn": "958197989-1",
+	"dateAdded": "2023-05-19",
+	"dateDeleted": null,
+	"plot": "Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo.",
+	"numberOfReads": 1
+}
+```
