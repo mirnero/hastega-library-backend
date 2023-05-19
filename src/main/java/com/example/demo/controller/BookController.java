@@ -8,8 +8,9 @@ import com.example.demo.repository.BookRepository;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +33,11 @@ public class BookController {
 
     // GET /books
     @GetMapping
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public Page<Book> getAllBooks(Pageable pageable) {
+        return bookRepository.findAll(pageable);
     }
+
+
 
     // GET /books/{id}
     @GetMapping("/{id}")
