@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import jakarta.persistence.criteria.Predicate;
 
@@ -66,6 +68,7 @@ public class BookController {
     // POST /books
     @PostMapping
     public Book createBook(@RequestBody Book book) {
+        book.setDateAdded(LocalDate.now());
         return bookRepository.save(book);
     }
 
