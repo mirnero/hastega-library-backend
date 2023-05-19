@@ -97,4 +97,8 @@ public class Book {
     public void setNumberOfReads(Integer numberOfReads) {
         this.numberOfReads = numberOfReads;
     }
+
+    public void read(){
+        this.numberOfReads++;
+    }
 }

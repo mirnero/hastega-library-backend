@@ -92,6 +92,17 @@ public class BookController {
         return bookRepository.save(book);
     }
 
+    // PUT /books/{id}/read
+    @PutMapping("/{id}/read")
+    public Book readBook(@PathVariable long id) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found"));
+
+        book.read();
+
+        return bookRepository.save(book);
+    }
+
     // DELETE /books/{id}
     @DeleteMapping("/{id}")
     public Book deleteBook(@PathVariable long id) {
