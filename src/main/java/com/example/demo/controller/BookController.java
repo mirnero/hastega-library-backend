@@ -15,6 +15,8 @@ import org.springframework.data.jpa.domain.Specification;
 import java.time.LocalDate;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import jakarta.persistence.criteria.Predicate;
 
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.data.domain.Sort;
+
 
 
 
@@ -58,8 +62,16 @@ public class BookController {
                 return criteriaBuilder.or(titlePredicate, authorPredicate, isbnPredicate);
             });
         }
-    
-        return bookRepository.findAll(spec, pageable);
+
+        // Ordinamento predefinito per la data di aggiunta
+        Sort defaultSort = Sort.by(Sort.Direction.DESC, "dateAdded");
+        Sort sortCustom = pageable.getSort();
+
+        if(Sort.unsorted() == sortCustom){
+            sortCustom = defaultSort;
+        }
+
+        return bookRepository.findAll(spec, PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sortCustom));
     }
 
 
