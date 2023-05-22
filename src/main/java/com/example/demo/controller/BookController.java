@@ -99,6 +99,9 @@ public class BookController {
                     book.setPlot(bookDetails.getPlot());
                 }
 
+                if (bookDetails.getNumberOfReads() != null) {
+                    book.setNumberOfReads(bookDetails.getNumberOfReads());
+                  }
         return bookRepository.save(book);
     }
 
